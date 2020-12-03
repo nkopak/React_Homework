@@ -7,6 +7,7 @@ class Post extends Component {
         return (
             <div>
                 {elem.id} : {elem.title}
+                <hr/>
             </div>
         );
     }

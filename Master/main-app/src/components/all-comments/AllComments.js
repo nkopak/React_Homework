@@ -4,7 +4,7 @@ import './AllComments.css'
 
 class AllComments extends Component {
 
-    state = {comments: [], classState: 'one', clsName:'pairs'}
+    state = {comments: [], classState: 'one', chosenComment: null}
     flag = false;
 
     componentDidMount() {
@@ -24,24 +24,26 @@ class AllComments extends Component {
         this.flag = !this.flag;
     }
 
+    selectComment = (id) => {
+        let chosenComment = this.state.comments.find(value => value.id === id)
+        this.setState({chosenComment});
+    }
+
     render() {
-        let {comments, classState,clsName} = this.state;
+        let {comments, classState, chosenComment} = this.state;
         return (
             <div>
-                {/*{*/}
-                {/*    comments.map(value => {*/}
-                {/*        if(value.id%2){*/}
-                {/*            clsName = 'pairs'*/}
-                {/*        } else {*/}
-                {/*            clsName ='not pairs'*/}
-                {/*        }*/}
-                {/*    })*/}
-                {/*}*/}
 
                 <h1 onClick={this.changeColor} className={classState}>All Comments</h1>
                 {
-                    comments.map(value => (<Comment elem={value} key={value.id} />))
+                    comments.map(value => (<Comment elem={value}
+                                                    key={value.id}
+                                                    selectComment={this.selectComment}
+                    />))
+                }
 
+                {chosenComment &&
+                (<Comment elem={chosenComment}/>)
                 }
             </div>
         );
