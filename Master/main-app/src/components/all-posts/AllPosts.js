@@ -4,7 +4,7 @@ import './AllPosts.css'
 
 class AllPosts extends Component {
 
-    state = {posts: [], classState: 'one'};
+    state = {posts: [], classState: 'one', chosenPost: null};
     flag = false;
 
     componentDidMount() {
@@ -24,13 +24,24 @@ class AllPosts extends Component {
         this.flag = !this.flag;
     }
 
+    selectPost = (id) => {
+        let chosenPost = this.state.posts.find(value => value.id === id);
+        this.setState({chosenPost});
+    }
+
     render() {
-        let {posts, classState} = this.state;
+        let {posts, classState, chosenPost} = this.state;
         return (
             <div>
                 <h1 onClick={this.changeColor} className={classState}>All Posts</h1>
                 {
-                    posts.map(value => (<Post elem={value} key={value.id}/>))
+                    posts.map(value => (<Post elem={value}
+                                              key={value.id}
+                                              selectPost={this.selectPost}/>))
+                }
+
+                {
+                    chosenPost && (<Post elem={chosenPost}/>)
                 }
             </div>
         );
