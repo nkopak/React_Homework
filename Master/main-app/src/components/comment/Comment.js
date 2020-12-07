@@ -6,9 +6,8 @@ class Comment extends Component {
         let {elem,selectComment} = this.props;
         return (
             <div>
-
+                {elem.name} {elem.id}
                 <button onClick={()=>selectComment(elem.id)}>Chose me</button>
-                {elem.email} : {elem.body} {elem.name} {elem.id}
                 <hr/>
             </div>
         );

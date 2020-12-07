@@ -42,8 +42,7 @@ class AllComments extends Component {
                     />))
                 }
 
-                {chosenComment &&
-                (<Comment elem={chosenComment}/>)
+                {chosenComment && <h3> {chosenComment.id} - {chosenComment.name} - {chosenComment.email} - {chosenComment.body}</h3>
                 }
             </div>
         );

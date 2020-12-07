@@ -6,8 +6,9 @@ class Post extends Component {
         let {elem, selectPost} = this.props;
         return (
             <div>
-                <button onClick={()=> selectPost(elem.id)}>Chose me</button>
+
                 {elem.id} : {elem.title}
+                <button onClick={()=> selectPost(elem.id)}>Chose me</button>
                 <hr/>
             </div>
         );

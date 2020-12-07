@@ -41,7 +41,7 @@ class AllPosts extends Component {
                 }
 
                 {
-                    chosenPost && (<Post elem={chosenPost}/>)
+                    chosenPost && <h3> {chosenPost.id} - {chosenPost.title} - {chosenPost.body} </h3>
                 }
             </div>
         );
