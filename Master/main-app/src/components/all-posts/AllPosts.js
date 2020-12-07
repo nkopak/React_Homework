@@ -1,18 +1,17 @@
 import React, {Component} from 'react';
 import Post from "../post/Post";
 import './AllPosts.css'
+import {PostService} from "../../services/posts/PostService";
 
 class AllPosts extends Component {
+
+    postService = new PostService();
 
     state = {posts: [], classState: 'one', chosenPost: null};
     flag = false;
 
     componentDidMount() {
-        fetch('https://jsonplaceholder.typicode.com/posts')
-            .then(value => value.json())
-            .then(postsFromAPI => {
-                this.setState({posts: postsFromAPI})
-            })
+        this.postService.getAllPosts().then(value => this.setState({posts: value}));
     }
 
     changeColor = () => {

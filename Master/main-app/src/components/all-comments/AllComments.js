@@ -1,18 +1,17 @@
 import React, {Component} from 'react';
 import Comment from "../comment/Comment";
 import './AllComments.css'
+import {CommentService} from "../../services/comments/CommentService";
 
 class AllComments extends Component {
+
+    commentService = new CommentService();
 
     state = {comments: [], classState: 'one', chosenComment: null}
     flag = false;
 
     componentDidMount() {
-        fetch('https://jsonplaceholder.typicode.com/comments')
-            .then(value => value.json())
-            .then(commentsFormsAPI => {
-                this.setState({comments: commentsFormsAPI})
-            })
+        this.commentService.getAllComments().then(value => this.setState({comments: value}));
     }
 
     changeColor = () => {
@@ -28,6 +27,9 @@ class AllComments extends Component {
         let chosenComment = this.state.comments.find(value => value.id === id)
         this.setState({chosenComment});
     }
+    // selectComment = (id) => {
+    //     this.commentService.getCommentById(id).then(value => this.setState({chosenComment: value}))
+    // }
 
     render() {
         let {comments, classState, chosenComment} = this.state;
