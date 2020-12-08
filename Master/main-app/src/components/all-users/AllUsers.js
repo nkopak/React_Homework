@@ -1,20 +1,37 @@
 import React, {Component} from 'react';
 import UserService from "../services/UserService";
+import User from "../user/User";
+import './AllUsers.css';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 
 class AllUsers extends Component {
 
-    state = {users: []}
+    state = {users: []};
     userService = new UserService();
 
     async componentDidMount() {
         let users = await this.userService.getAllUsers();
-        this.setState({users})
+        this.setState({users});
     }
 
     render() {
+        let {users} = this.state;
         return (
             <div>
+                {users.map(value => <User key={value.id} item={value}/>)}
 
+                <div className={'nest'}>
+                    <Switch>
+                        <Route path={'/users/:id'} render={()=>{
+                            return 'Some user'
+                        }}/>
+                    </Switch>
+                </div>
             </div>
         );
     }
