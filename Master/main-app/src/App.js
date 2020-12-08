@@ -7,6 +7,7 @@ import {
     Route,
     Link
 } from "react-router-dom";
+import AllComments from "./components/all-comments/AllComments";
 
 
 class App extends Component {
@@ -22,6 +23,10 @@ class App extends Component {
                     <Link to={'/posts'}>
                         Posts
                     </Link>
+                    <br/>
+                    <Link to={'/comments'}>
+                        Comments
+                    </Link>
                     <fieldset>
                         <Switch>
                             <Route path={'/users'} render={() => {
@@ -29,6 +34,9 @@ class App extends Component {
                             }}/>
                             <Route path={'/posts'} render={() => {
                                 return <AllPosts/>
+                            }}/>
+                            <Route path={'/comments'} render={()=>{
+                                return <AllComments/>
                             }}/>
                         </Switch>
                     </fieldset>
