@@ -1,13 +1,6 @@
 import React, {Component} from 'react';
 
-import {
-    BrowserRouter as Router,
-    Switch,
-    useLocation,
-    Route,
-    Link,
-    withRouter
-} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 
 class Comment extends Component {
 
