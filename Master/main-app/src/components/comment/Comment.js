@@ -1,12 +1,21 @@
 import React, {Component} from 'react';
-import {Link, withRouter} from "react-router-dom";
+
+import {
+    BrowserRouter as Router,
+    Switch,
+    useLocation,
+    Route,
+    Link,
+    withRouter
+} from "react-router-dom";
 
 class Comment extends Component {
+
     render() {
         let {item, match: {url}} = this.props;
         return (
             <div>
-                {item.id} - {item.name} - <Link to={`${url}/${item.id}`}>Info</Link>
+                {item.id}) {item.name} - <Link to={`${url}/${item.id}`}>Comment info</Link>
             </div>
         );
     }

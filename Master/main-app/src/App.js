@@ -1,45 +1,27 @@
 import React, {Component} from 'react';
-import AllUsers from "./components/all-users/AllUsers";
+
+import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 import AllPosts from "./components/all-posts/AllPosts";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
 import AllComments from "./components/all-comments/AllComments";
 
-
 class App extends Component {
-
     render() {
         return (
             <Router>
                 <div>
-                    <Link to={'/users'}>
-                        Users
-                    </Link>
-                    <br/>
-                    <Link to={'/posts'}>
-                        Posts
-                    </Link>
-                    <br/>
-                    <Link to={'/comments'}>
-                        Comments
-                    </Link>
-                    <fieldset>
-                        <Switch>
-                            <Route path={'/users'} render={() => {
-                                return <AllUsers/>
-                            }}/>
-                            <Route path={'/posts'} render={() => {
-                                return <AllPosts/>
-                            }}/>
-                            <Route path={'/comments'} render={()=>{
-                                return <AllComments/>
-                            }}/>
-                        </Switch>
-                    </fieldset>
+                    <ul>
+                        <li>
+                            <Link to={'/posts'}>To all posts</Link>
+                        </li>
+                        <li>
+                            <Link to={'/comments'}>To all comments</Link>
+                        </li>
+                    </ul>
+                    <hr/>
+                    <Switch>
+                        <Route path={'/posts'} render={()=><AllPosts/>}/>
+                        <Route path={'/comments'} render={()=><AllComments/>}/>
+                    </Switch>
                 </div>
             </Router>
         );
