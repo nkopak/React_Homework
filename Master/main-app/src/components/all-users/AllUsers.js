@@ -8,6 +8,7 @@ import {
     Route,
     Link
 } from "react-router-dom";
+import UserPost from "../user/UserPost";
 
 class AllUsers extends Component {
 
@@ -28,7 +29,7 @@ class AllUsers extends Component {
                 <div className={'nest'}>
                     <Switch>
                         <Route path={'/users/:id'} render={()=>{
-                            return 'Some user'
+                            return <UserPost/>
                         }}/>
                     </Switch>
                 </div>

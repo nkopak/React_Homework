@@ -6,7 +6,7 @@ class Post extends Component {
         let {item, match: {url}} = this.props;
         return (
             <div>
-                {item.id} - {item.title} - <Link to={`${url}/${item.id}`}>Info</Link>
+                {item.id} - {item.title} - <Link to={`${url}/${item.id}/comments`}>Info</Link>
             </div>
         )
     }

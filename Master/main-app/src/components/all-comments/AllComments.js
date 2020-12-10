@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import './AllComments.css';
-
+import CommentService from "../services/CommentService";
+import Comment from "../comment/Comment";
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     Link
 } from "react-router-dom";
-import CommentService from "../services/CommentService";
-import Comment from "../comment/Comment";
+
 
 class AllComments extends Component {
 
@@ -18,7 +18,6 @@ class AllComments extends Component {
     async componentDidMount() {
         let comments = await this.commentService.getAllComments();
         this.setState({comments})
-
     }
 
     render() {
