@@ -1,0 +1,6 @@
+.user-posts {
+    display: flex;
+    position: relative;
+    left: 100px;
+    background-color: cornflowerblue;
+}

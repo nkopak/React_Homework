@@ -1,15 +1,24 @@
 import React, {Component} from 'react';
+import './User.css'
+import {Switch,Route, Link, withRouter} from "react-router-dom";
+import UserPosts from "../user-posts/UserPosts";
 
 class User extends Component {
     render() {
-        let {item, chosenUser, selectedUser} = this.props;
+        let {item, match: {url}} = this.props;
+        // console.log(url);
         return (
-            <div>
-                {item.id}) {item.name}
-                <button onClick={()=>selectedUser(item.id)}>Info</button>
+            <div className={'user-block'}>
+                <span className={'user-text'}>{item.id}) {item.name}</span>
+                <Link className={'user-link'} to={`${url}/${item.id}`}>Info</Link>
+                <Link className={'user-link'} to={`${url}/${item.id}/posts`}>Posts</Link>
+                {/*<button onClick={()=>selectedUser(item.id)} className={'btn'}>Info</button>*/}
+                <Switch>
+                    <Route path={`${url}/${item.id}/posts`} render={()=> <UserPosts/>}/>
+                </Switch>
             </div>
         );
     }
 }
 
-export default User;
+export default withRouter(User);
