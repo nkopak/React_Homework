@@ -3,12 +3,47 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {createStore} from "redux";
+import {Provider} from "react-redux";
+
+const initialState = {
+    counter: 0,
+    user: {name: 'art', age: 234}
+}
+const reducer = (state = initialState, action) => {
+    switch (action.type) {
+        case 'INC_COUNTER': {
+            return {...state, counter: state.counter + 1}
+        }
+        case 'DEC_COUNTER': {
+            return {...state, counter: state.counter - 1}
+        }
+        case 'RESET': {
+            return {...state, counter: 0}
+        }
+        default: {
+            console.error(action, 'no action match')
+            return state;
+        }
+    }
+}
+const store = createStore(reducer);
+// store.subscribe(()=>{
+//     console.log(store.getState())
+// });
+// store.dispatch({type:'DEC_COUNTER'})
+// store.dispatch({type:'DEC_COUNTER'})
+// store.dispatch({type:'DEC_COUNTER'})
+
+console.log(store);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
