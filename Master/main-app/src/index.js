@@ -7,27 +7,17 @@ import {Provider} from 'react-redux';
 import {createStore} from "redux";
 
 const initialState = {
-    userId: null,
-    id: null,
-    title: "",
-    completed: false
-}
+    name: ''
+};
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'SET_TODO': {
-            return action.payload
+        case 'ADD_USER': {
+return {...state, name: state.name = }
         }
-        case 'CHANGE_TODO_STATUS': {
+        case 'DELETE_USER': {
             return {
-                ...state,
-                completed: !state.completed
-            };
-        }
-        case 'CHANGE_TODO_TITLE': {
-            return {
-                ...state,
-                title: action.payload
+
             };
         }
         default: {
