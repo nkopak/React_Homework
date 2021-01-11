@@ -1,34 +1,42 @@
-import React, {useState, useEffect, useReducer} from 'react';
-import {useSelector,useDispatch} from "react-redux";
-
+import React, {useCallback, useEffect} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import Header from "./components/header/Header";
+import './App.css'
+import ProductList from "./components/product-list/ProductList";
+import {useServices} from "./services";
+import {setProducts} from "./redux";
 
 export default function App() {
 
-    const [counter, setCounter] = useState(1);
-    const todo = useSelector((todo)=>todo);
+    const {cart, wishlist, products} = useSelector(({cart: {cart}, wishlist: {wishlist}, products: {products}}) => ({
+        cart,
+        wishlist,
+        products
+    }))
+
     const dispatch = useDispatch();
+    const {productService} = useServices();
+
+    // const fetchData = useCallback(async () => {
+    //     const response = await productService.getProducts();
+    //     const json = await response.json();
+    //
+    //     dispatch(setProducts(json));
+    //     // console.log(json);
+    // }, [])
+
 
     useEffect(() => {
-        fetch(`https://jsonplaceholder.typicode.com/todos/${counter}`)
-            .then(response => response.json())
-            .then(json => {
-                dispatch({type:'SET_TODO', payload: json});
-                console.log(json)
-            })
-    }, [counter])
+        // fetchData()
+        dispatch(setProducts());
+    }, [])
 
     return (
         <div>
-            <button onClick={() => setCounter((prevState) => prevState + 1)}>Increase count</button>
-            <button onClick={() => dispatch({type: 'CHANGE_TODO_STATUS'})}>Change status</button>
-            <button onClick={() => dispatch({type: 'CHANGE_TODO_TITLE', payload: Math.random()})}>Change title</button>
-            <h1>Counter: {counter}</h1>
-            {!!todo &&
-            (<div>
-                <h1>Id: {todo.id}</h1>
-                <h1>Title: {todo.title}</h1>
-                <h1>Completed: {todo.completed.toString()}</h1>
-            </div>)}
+            <Header/>
+            <ProductList products={products}/>
+            <h2>Hello React</h2>
+            {products.length}
         </div>
     );
 

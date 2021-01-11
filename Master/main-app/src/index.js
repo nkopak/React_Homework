@@ -4,40 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux';
-import {createStore} from "redux";
+import {store} from "./redux";
 
-const initialState = {
-    userId: null,
-    id: null,
-    title: "",
-    completed: false
-}
-
-const reducer = (state = initialState, action) => {
-    switch (action.type) {
-        case 'SET_TODO': {
-            return action.payload
-        }
-        case 'CHANGE_TODO_STATUS': {
-            return {
-                ...state,
-                completed: !state.completed
-            };
-        }
-        case 'CHANGE_TODO_TITLE': {
-            return {
-                ...state,
-                title: action.payload
-            };
-        }
-        default: {
-            console.error('Didnt found case for action:', action)
-            return state;
-        }
-    }
-}
-
-const store = createStore(reducer);
 
 ReactDOM.render(
     <React.StrictMode>
