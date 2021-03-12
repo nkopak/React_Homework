@@ -1,43 +1,35 @@
-import React, {useCallback, useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import Header from "./components/header/Header";
+import React from 'react';
 import './App.css'
-import ProductList from "./components/product-list/ProductList";
-import {useServices} from "./services";
-import {setProducts} from "./redux";
+import {Switch, Route, useHistory, Redirect} from 'react-router-dom';
+import {BaseLayout} from "./layouts";
+import {Home,MovieDetails} from "./pages";
+
 
 export default function App() {
 
-    const {cart, wishlist, products} = useSelector(({cart: {cart}, wishlist: {wishlist}, products: {products}}) => ({
-        cart,
-        wishlist,
-        products
-    }))
-
-    const dispatch = useDispatch();
-    const {productService} = useServices();
-
-    // const fetchData = useCallback(async () => {
-    //     const response = await productService.getProducts();
-    //     const json = await response.json();
-    //
-    //     dispatch(setProducts(json));
-    //     // console.log(json);
-    // }, [])
-
-
-    useEffect(() => {
-        // fetchData()
-        dispatch(setProducts());
-    }, [])
+    const history = useHistory();
 
     return (
-        <div>
-            <Header/>
-            <ProductList products={products}/>
-            <h2>Hello React</h2>
-            {products.length}
-        </div>
+        <BaseLayout>
+            <Switch>
+                <Route path='/' exact>
+                    <Home/>
+                </Route>
+
+                {/*<Route>*/}
+                {/*    <Redirect to='/'/>*/}
+                {/*</Route>*/}
+
+                <Route path='/movie/:id'>
+                    <MovieDetails/>
+                </Route>
+
+                <Route>
+                    <h1>Page not found<button onClick={() => history.push('/')}>go home</button></h1>
+                </Route>
+
+            </Switch>
+        </BaseLayout>
     );
 
 }
